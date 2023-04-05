@@ -27,6 +27,25 @@ namespace WebApp_ClinicalManagement.Controllers
                           Problem("Entity set 'ApplicationDbContext.Items'  is null.");
         }
 
+        // GET: Get Available Items
+        public IActionResult IndexAvailable()
+        {
+            if (_context.Items != null) 
+            { 
+                var availableItems = _context.Items
+                    .Where(item => item.Discontinued == false)
+                    .ToList();
+
+                return View(availableItems);    
+            
+            }
+            else
+            {
+                return Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+            }
+        }
+
+
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
         {
