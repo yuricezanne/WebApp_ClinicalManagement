@@ -3,15 +3,15 @@
     public class ProfessionalTeam
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
         public int ZipCode { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
+        public string City { get; set; } = string.Empty;
+        public string Country { get; set; } = string.Empty;
         public int Vat { get; set; }
-        public string JobId { get; set; }
-        public string JobRole { get; set; }
+        public string JobId { get; set; } = string.Empty;
+        public string JobRole { get; set; } = string.Empty;
 
         // Constructor
         public ProfessionalTeam(

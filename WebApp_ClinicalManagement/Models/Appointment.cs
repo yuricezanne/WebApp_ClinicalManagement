@@ -9,23 +9,20 @@ namespace WebApp_ClinicalManagement.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public Client Client { get; set; }
-        public ProfessionalTeam Doctor { get; set; }
-        public string Observation { get; set; }
+        public Client? Client { get; set; }
+        public ProfessionalTeam? Doctor { get; set; }
+        public string Observation { get; set; } = string.Empty;
         public bool IsDone { get; set; }
 
+        // Constructor
         public Appointment(
            int id,
            DateTime date,
-           Client client,
-           ProfessionalTeam doctor,
            string observation,
            bool isDone)
         {
             Id = id;
             Date = date;
-            Client = client;
-            Doctor = doctor;
             Observation = observation;
             IsDone = isDone;            
         }

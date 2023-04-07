@@ -10,33 +10,33 @@ using WebApp_ClinicalManagement.Models;
 
 namespace WebApp_ClinicalManagement.Controllers
 {
-    public class ItemsController : Controller
+    public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemsController(ApplicationDbContext context)
+        public AppointmentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Items
+        // GET: Appointments
         public async Task<IActionResult> Index()
         {
-              return _context.Items != null ? 
-                          View(await _context.Items.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+              return _context.StockMovements != null ? 
+                          View(await _context.StockMovements.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.StockMovements'  is null.");
         }
 
-        // GET: Get Available Items
+        // GET: Get Appointment Done
         public IActionResult IndexAvailable()
         {
-            if (_context.Items != null) 
-            { 
+            if (_context.Items != null)
+            {
                 var availableItems = _context.Items
-                    .Where(item => item.Discontinued == false)
+                    .Where(item => item.IsDone == false)
                     .ToList();
 
-                return View("Index", availableItems);    
+                return View("Index", availableItems);
 
 
             }
@@ -47,16 +47,16 @@ namespace WebApp_ClinicalManagement.Controllers
         }
 
         // GET: Get Discontinued Items
-        public IActionResult IndexDiscontinued()
+        public IActionResult IndexIsDone()
         {
             if (_context.Items != null)
             {
                 var discontinuedItems = _context.Items
-                    .Where(item => item.Discontinued == true)
+                    .Where(item => item.IsDone == true)
                     .ToList();
 
                 return View("Index", discontinuedItems);
-                
+
             }
             else
             {
@@ -64,70 +64,70 @@ namespace WebApp_ClinicalManagement.Controllers
             }
         }
 
-        // GET: Items/Details/5
+        // GET: Appointments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.StockMovements == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (item == null)
+            var appointment = await _context.StockMovements
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(appointment);
         }
 
-        // GET: Items/Create
+        // GET: Appointments/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Items/Create
+        // POST: Appointments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,CreationDate,Discontinued")] Client item)
+        public async Task<IActionResult> Create([Bind("Id,Date,Observation,IsDone")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+                _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(appointment);
         }
 
-        // GET: Items/Edit/5
+        // GET: Appointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.StockMovements == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items.FindAsync(id);
-            if (item == null)
+            var appointment = await _context.StockMovements.FindAsync(id);
+            if (appointment == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(appointment);
         }
 
-        // POST: Items/Edit/5
+        // POST: Appointments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,CreationDate,Discontinued")] Client item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Observation,IsDone")] Appointment appointment)
         {
-            if (id != item.ID)
+            if (id != appointment.Id)
             {
                 return NotFound();
             }
@@ -136,12 +136,12 @@ namespace WebApp_ClinicalManagement.Controllers
             {
                 try
                 {
-                    _context.Update(item);
+                    _context.Update(appointment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.ID))
+                    if (!AppointmentExists(appointment.Id))
                     {
                         return NotFound();
                     }
@@ -152,49 +152,49 @@ namespace WebApp_ClinicalManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(appointment);
         }
 
-        // GET: Items/Delete/5
+        // GET: Appointments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Items == null)
+            if (id == null || _context.StockMovements == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (item == null)
+            var appointment = await _context.StockMovements
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (appointment == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(appointment);
         }
 
-        // POST: Items/Delete/5
+        // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Items == null)
+            if (_context.StockMovements == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.StockMovements'  is null.");
             }
-            var item = await _context.Items.FindAsync(id);
-            if (item != null)
+            var appointment = await _context.StockMovements.FindAsync(id);
+            if (appointment != null)
             {
-                _context.Items.Remove(item);
+                _context.StockMovements.Remove(appointment);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemExists(int id)
+        private bool AppointmentExists(int id)
         {
-          return (_context.Items?.Any(e => e.ID == id)).GetValueOrDefault();
+          return (_context.StockMovements?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

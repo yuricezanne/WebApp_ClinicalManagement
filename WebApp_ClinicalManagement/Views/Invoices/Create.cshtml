@@ -1,4 +1,4 @@
-﻿@model WebApp_ClinicalManagement.Models.Client
+﻿@model WebApp_ClinicalManagement.Models.Invoice
 
 @{
     ViewData["Title"] = "Create";
@@ -6,16 +6,16 @@
 
 <h1>Create</h1>
 
-<h4>Item</h4>
+<h4>Invoice</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="AppointmentDescription" class="control-label"></label>
+                <input asp-for="AppointmentDescription" class="form-control" />
+                <span asp-validation-for="AppointmentDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -23,13 +23,18 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" />
-                <span asp-validation-for="CreationDate" class="text-danger"></span>
+                <label asp-for="Vat" class="control-label"></label>
+                <input asp-for="Vat" class="form-control" />
+                <span asp-validation-for="Vat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Discontinued" /> @Html.DisplayNameFor(model => model.Discontinued)
+                    <input class="form-check-input" asp-for="IsPaid" /> @Html.DisplayNameFor(model => model.IsPaid)
                 </label>
             </div>
             <div class="form-group">

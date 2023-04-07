@@ -12,5 +12,7 @@ namespace WebApp_ClinicalManagement.Data
         }
         public DbSet<Client> Items { get; set; } = default!;
         public DbSet<Appointment> StockMovements { get; set; } = default!;
+        public DbSet<WebApp_ClinicalManagement.Models.ProfessionalTeam> ProfessionalTeam { get; set; } = default!;
+        public DbSet<WebApp_ClinicalManagement.Models.Invoice> Invoice { get; set; } = default!;
     }
 }
