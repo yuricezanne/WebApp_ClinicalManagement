@@ -56,7 +56,7 @@ namespace WebApp_ClinicalManagement.Controllers
                     .ToList();
 
                 return View("Index", discontinuedItems);
-
+                
             }
             else
             {
@@ -93,7 +93,7 @@ namespace WebApp_ClinicalManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,CreationDate,Discontinued")] Item item)
+        public async Task<IActionResult> Create([Bind("ID,Name,Price,CreationDate,Discontinued")] Client item)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace WebApp_ClinicalManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,CreationDate,Discontinued")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,CreationDate,Discontinued")] Client item)
         {
             if (id != item.ID)
             {

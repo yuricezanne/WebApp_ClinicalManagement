@@ -77,7 +77,7 @@ namespace WebApp_ClinicalManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Type,Amount,MovementDate,ItemID")] StockMovement stockMovement)
+        public async Task<IActionResult> Create([Bind("ID,Type,Amount,MovementDate,ItemID")] Appointment stockMovement)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace WebApp_ClinicalManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Type,Amount,MovementDate,ItemID")] StockMovement stockMovement)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Type,Amount,MovementDate,ItemID")] Appointment stockMovement)
         {
             if (id != stockMovement.ID)
             {

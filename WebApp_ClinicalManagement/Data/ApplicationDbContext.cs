@@ -10,7 +10,7 @@ namespace WebApp_ClinicalManagement.Data
             : base(options)
         {
         }
-        public DbSet<Item> Items { get; set; } = default!;
-        public DbSet<StockMovement> StockMovements { get; set; } = default!;
+        public DbSet<Client> Items { get; set; } = default!;
+        public DbSet<Appointment> StockMovements { get; set; } = default!;
     }
 }
