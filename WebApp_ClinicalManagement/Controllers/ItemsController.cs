@@ -36,8 +36,9 @@ namespace WebApp_ClinicalManagement.Controllers
                     .Where(item => item.Discontinued == false)
                     .ToList();
 
-                return View(availableItems);    
-            
+                return View("Index", availableItems);    
+
+
             }
             else
             {
@@ -45,6 +46,23 @@ namespace WebApp_ClinicalManagement.Controllers
             }
         }
 
+        // GET: Get Discontinued Items
+        public IActionResult IndexDiscontinued()
+        {
+            if (_context.Items != null)
+            {
+                var discontinuedItems = _context.Items
+                    .Where(item => item.Discontinued == true)
+                    .ToList();
+
+                return View("Index", discontinuedItems);
+
+            }
+            else
+            {
+                return Problem("Entity set 'ApplicationDbContext.Items'  is null.");
+            }
+        }
 
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
